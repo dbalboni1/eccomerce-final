@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+    <title>Dan Balboni CPSC 332</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>-->
+
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous">
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            
+            // var cursor = db.catalog.find();
+            // cursor.forEach(function(doc) {
+            //     alert("hello");
+            //     print("CATALOG: " + doc.catalog_name);
+            //     console.log("URL: " + doc.url);
+            // });
+
+            // var $catalogs = $("#catalogs");
+
+            // db.catalog.find().forEach( function(doc) {
+            //     alert("hello");
+            //     print("CATALOG: " + doc.catalog_name);
+            //     console.log("URL: " + doc.url);
+            //     $( catalogs ).append("<div class='catalog'> " 
+            //                         + "<h2 id='cat-overlay'>Shop " + doc.catalog_name + "</h2>"
+            //                         + "<img id='cat-img' src=" + doc.url + ">"
+            //                         + "</div>");
+            // });
+
+            // var $summer = $("#catalogs");
+            // $summer.click( function() {
+            //     alert("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            // });
+        });
+    </script>
+
+    <style>
+        body {
+            display: flex;
+            height:100%;
+            background-color: antiquewhite;
+        }
+        #body-container {
+            height:fit-content;
+            width:100%;
+            margin:20px;
+            border-radius:10px;
+            background-color:rgb(236, 255, 255);
+        }
+        #header {
+            background-color: white;
+            width: 98%;
+            height: fit-content;
+            margin:1%;
+            border-radius: 10px;
+            position: relative;
+            display: inline-block;
+            align-items: center;
+        } 
+        .nav-icons {
+            height:30px;
+            margin:15px;
+            margin-left:5%;
+            margin-right:5%;
+            padding:5px;
+        }
+        .nav-icons:hover {
+            outline: auto;
+            outline-color: black;
+            outline-width: 2px;
+            outline-style: groove;
+            border-radius: 5px;
+            box-shadow: 3px 3px 3px lightblue;
+        }
+        #home {
+            float: left;
+        }
+        #menu {
+            float: right;
+        }
+        #content-container {
+            margin-top: 30px;
+            border-radius: 50px;
+        } 
+        #title {
+            margin-left:15%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:50px;
+        }
+        #catalogs {
+            display:flex;
+            flex-wrap: nowrap;
+            max-width: 95%;
+            justify-content: flex-start;
+            flex-direction: row;
+            margin:20px;
+        }
+        #catalogs>* {
+            flex: 1 1 50%;
+        }
+        .catalog {
+            background-color: white;
+            border-radius: 10px;
+            margin:10px;
+            padding:15px;
+        }
+        .catalog:hover #cat-overlay {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.2s;
+        }
+        #cat-img {
+            height:300px;
+            max-width: 100%;
+            object-fit: cover;
+        }
+        #cat-overlay {
+            opacity:0;
+            position: absolute;
+            background-color: white;
+            padding-left:3px;
+            padding-right: 10px;
+            width:min-content;
+            -webkit-text-stroke-width:thin;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="body-container">
+        <div id="header">
+            <img src="../assets/home.png" class="nav-icons" id="home">
+            <div id="cart">
+                <img src="../assets/shopping-cart.png" class="nav-icons" id="menu">
+            </div>
+        </div>
+        <div id="content-container">
+            <h1 id="title">Store Page</h1>
+            <div id="catalogs">
+                <!-- Change img to an input with an img src -->
+                <% catalogContents.forEach(function(response) { //debugger; %>
+                    <form action="/catalog" method="GET" id="<%= response.catalog_name %>">
+                        <div class="catalog">
+                            <h2 id="cat-overlay">Shop <%= response.catalog_name %></h2>
+                            <input type="image" id="cat-img" src="<%= response.url %>">
+                        </div>
+                    </form>
+                <% }); %>
+
+                <!-- <div class="catalog" id="summer">
+                    <h2 id="cat-overlay">Shop Summer</h2>
+                    <img id="cat-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fgetwallpapers.com%2Fwallpaper%2Ffull%2F4%2Fc%2F3%2F911916-cool-beautiful-summer-backgrounds-1920x1080-notebook.jpg&f=1&nofb=1&ipt=686faf8679ec17556073dbb3416b70282bf33fe60565a24c24718fc5411ad11f&ipo=images">
+                </div>
+                <div class="catalog" id="fall">
+                    <h2 id="cat-overlay">Shop Fall</h2>
+                    <img id="cat-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.plumbingprofessors.com%2Fwp-content%2Fuploads%2F2018%2F10%2Fautumn-colorful-colourful-33109.jpg&f=1&nofb=1&ipt=03ac7eb054ebacb6a98140196989add04e8257100b9225267439a7c3d0cec65c&ipo=images">
+                </div>
+                <div class="catalog" id="winter">
+                    <h2 id="cat-overlay">Shop Winter</h2>
+                    <img id="cat-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fjooinn.com%2Fimages%2Fwinter-128.jpg&f=1&nofb=1&ipt=222f7586070727c09c8019ce005dc248ec2368066acdebb8af865253f624e573&ipo=images">
+                </div>
+                <div class="catalog" id="spring">
+                    <h2 id="cat-overlay">Shop Spring</h2>
+                    <img id="cat-img" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperboat.com%2Fwp-content%2Fuploads%2F2020%2F03%2Fspring-13.jpg&f=1&nofb=1&ipt=95f892a5d1f1ebc82ed40e5aa8a58841fc3c7dc21c9c898cd5ae89754a60cd22&ipo=images">
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

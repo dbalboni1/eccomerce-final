@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+    <title>Dan Balboni CPSC 332</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!--<link rel='stylesheet' type='text/css' media='screen' href='main.css'>-->
+
+    <style>
+        body {
+            display: flex;
+            height:100%;
+            background-color: antiquewhite;
+        }
+        #body-container {
+            height:fit-content;
+            width:100%;
+            margin:20px;
+            border-radius:10px;
+            background-color:rgb(236, 255, 255);
+        }
+        #header {
+            background-color: white;
+            width: 98%;
+            height: fit-content;
+            margin:1%;
+            border-radius: 10px;
+            position: relative;
+            display: inline-block;
+            align-items: center;
+        } 
+        .nav-icons {
+            height:30px;
+            margin:15px;
+            margin-left:5%;
+            margin-right:5%;
+            padding:5px;
+        }
+        .nav-icons:hover {
+            outline: auto;
+            outline-color: black;
+            outline-width: 2px;
+            outline-style: groove;
+            border-radius: 5px;
+            box-shadow: 3px 3px 3px lightblue;
+        }
+        #home {
+            float: left;
+        }
+        #menu {
+            float: right;
+        }
+        #content-container {
+            margin-top: 30px;
+            border-radius: 50px;
+        } 
+        #title {
+            margin-left:15%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size:50px;
+        }
+        #items {
+            display:flex;
+            flex-wrap: wrap;
+            max-width: 95%;
+            justify-content:center;
+            flex-direction: row;
+            margin:20px;
+        }
+        #items>* {
+            flex: 1 1 50%;
+        }
+        .item {
+            max-width: 15%;
+            min-width: 100px;
+            background-color: white;
+            border-radius: 10px;
+            margin:10px;
+            padding:15px;
+        }
+        .item:hover {
+            transition: opacity 0.2s;
+            box-shadow: 5px 5px 5px lightblue;
+        }
+        .cat-img {
+            height:200px;
+            max-width: 100%;
+            object-fit: cover;
+            border: 1px solid;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            alert("PRODUCTS GOTTA LOVE IT");
+            let totalProducts = 4;
+            let productPhotos = [];
+            let photos = [];
+
+            //TODO: Hook this up and link it to specific catalog
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // var h = productContents.find( {catalog_name: "Summer"} ).fetch();
+            // for (var i=0; i<h.length; i++) {
+            //     photos.push(h[i].url);
+            //     photos.push(h[i].url2);
+            //     productPhotos.push(photos);
+            // }
+            
+            //.fetch()
+            <% productContents.forEach(function(response) { %>
+                photos.push( <%= response.url %> );
+                photos.push( <%= response.url2 %> );
+                photos.push( "lemons");
+                productPhotos.push(photos);
+            <% }); %>
+            /*productPhotos = [
+                ["https://m.media-amazon.com/images/I/51NOqcVg9uL._AC_UY879_.jpg",
+                "https://m.media-amazon.com/images/I/71oYJxGyP0L._AC_UY879_.jpg",
+                "https://m.media-amazon.com/images/I/71fIf45ZCsL._AC_UY879_.jpg"
+                ],
+                ["https://m.media-amazon.com/images/I/61x8RDB3NML._AC_UX679_.jpg",
+                "https://m.media-amazon.com/images/I/714sTl3paVL._AC_UX679_.jpg",
+                "https://m.media-amazon.com/images/I/61o8cU+uS7L._AC_UX679_.jpg"
+                ],
+                ["https://m.media-amazon.com/images/I/71C0OVty+UL._AC_UY879_.jpg",
+                "https://m.media-amazon.com/images/I/71rh2Rp90RL._AC_UY879_.jpg",
+                "https://m.media-amazon.com/images/I/71NxV0smOXL._AC_UY879_.jpg"
+                ],
+                ["https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fproject-nerd.com%2Fwp-content%2Fuploads%2F2020%2F05%2FCavill-Superman-Feature.jpg&f=1&nofb=1&ipt=d74f34b244a35392a412c948aa702d33253f3789d24d46508918ab9331feaa0b&ipo=images",
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic1.srcdn.com%2Fwordpress%2Fwp-content%2Fuploads%2F2020%2F11%2FSuperman-Returns.jpg&f=1&nofb=1&ipt=6d9726f0742723ec1be37e7ea4f33e457a5a999bd94395603f8bd46a35ecdc21&ipo=images",
+                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fexternal-preview.redd.it%2FsVAhS9sl7nJp15mi-RSkNn1XHLNJxT37fEFyIi0WqZY.jpg%3Fauto%3Dwebp%26s%3D095c07c6e4d611cbbf94e91648b7880cee353f93&f=1&nofb=1&ipt=89e58695e30f7b6c1b307e77af7a43dec47f66483c54e39692569067b96a17de&ipo=images"
+                ]
+            ];*/
+
+            var img;
+            var timer;
+
+            waitForElm('.cat-img').then((elm) => {
+                img = document.getElementsByClassName("cat-img");
+
+                for(var a = 0; a < img.length; ++a) {
+                    listenerFor(a);
+                }
+            });
+            
+
+            function listenerFor( a ) {
+                document.getElementById(img[a].id).addEventListener("mouseover",function() {
+                    setImg(img[a],0);
+                    <% console.log( "mouse over" ); %>
+                });
+                document.getElementById(img[a].id).addEventListener("mouseout",function() {
+                    clearTimeout(timer);
+                    <% console.log( "mouse out" ); %>
+                });
+            }
+
+            function setImg(item,it) {
+                id = item.id;
+                console.log(id);
+                item.src = productPhotos[id][it];
+                if(productPhotos[id].length-1 > it) {
+                    it++;
+                } else {
+                    it = 0;
+                }
+                console.log(item.src);
+                timer = setTimeout( function() {
+                    setImg(item,it)
+                },1000);
+            }
+
+            function waitForElm(selector) {
+                return new Promise(resolve => {
+                    if (document.querySelector(selector)) {
+                        return resolve(document.querySelector(selector));
+                    }
+
+                    const observer = new MutationObserver(mutations => {
+                        if (document.querySelector(selector)) {
+                            resolve(document.querySelector(selector));
+                            observer.disconnect();
+                        }
+                    });
+
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="body-container">
+        <div id="header">
+            <img src="home.png" class="nav-icons" id="home">
+            <div id="cart">
+                <img src="shopping-cart.png" class="nav-icons" id="menu">
+            </div>
+        </div>
+        <div id="content-container">
+            <h1 id="title">Summer Catalog</h1>
+            <div id="items">
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                <% productContents.forEach(function(response) { //debugger; %>
+                    <form action="/product" method="GET" id="<%= response.catalog_name %>">
+                        <div class="item">
+                            <input type="image" class="cat-img" id="0" src="<%= response.url %>">
+                            <h3 id="item-title"><%= response.product_name %></h3>
+                            <h3 id="price">$ <%= response.price %></h3>
+                        </div>
+                    </form>
+                <% }); %>
+                <!-- <div class="item" id="summer">
+                    <img class="cat-img" id="0" src="https://m.media-amazon.com/images/I/51NOqcVg9uL._AC_UY879_.jpg">
+                    <h3 id="item-title">Shirt</h3>
+                    <h3 id="price">$5</h3>
+                </div>
+                <div class="item" id="fall">
+                    <img class="cat-img" id="1" src="https://m.media-amazon.com/images/I/61x8RDB3NML._AC_UX679_.jpg">
+                    <h3 id="item-title">hat</h3>
+                    <h3 id="price">$2</h3>
+                </div>
+                <div class="item" id="winter">
+                    <img class="cat-img" id="2" src="https://m.media-amazon.com/images/I/71NxV0smOXL._AC_UY879_.jpg">
+                    <h3 id="item-title">pants</h3>
+                    <h3 id="price">$10</h3>
+                </div>
+                <div class="item" id="spring">
+                    <img class="cat-img" id="3" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fproject-nerd.com%2Fwp-content%2Fuploads%2F2020%2F05%2FCavill-Superman-Feature.jpg&f=1&nofb=1&ipt=d74f34b244a35392a412c948aa702d33253f3789d24d46508918ab9331feaa0b&ipo=images">
+                    <h3 id="item-title">Superman</h3>
+                    <h3 id="price">$100000</h3>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
